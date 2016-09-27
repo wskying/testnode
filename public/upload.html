@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="jquery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#file_upload').click(function () {
+
+            var data = new FormData();
+            var files = $('#file')[0].files;
+
+            if (files) {
+                data.append('codecsv', files[0]);
+            }
+
+            $.ajax({
+                cache: false,
+                type: 'post',
+                dataType: 'json',
+                url: 'http://localhost:3000/upload',
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    alert("upload success");
+                }
+            });
+        });
+
+    })
+
+</script>
+<table style='width: 100%;height: 100%'>
+    <tr>
+        <td style='width:800px;text-align: center;'>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input id='fileUpload' name="fileUpload" type="file">
+                <!--<input id='file_upload' type="button" value="upload">-->
+                <input   type="submit" value="upload file">
+            </form>
+        </td>
+    </tr>
+</table>
